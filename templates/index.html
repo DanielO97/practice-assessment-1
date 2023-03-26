@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% block title %} Tea and Products {% endblock %}
+{% block body %}
+    <section class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img id="logo" src="/static/images/logo.png" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="siteitems">
+                        <li><a href="#catalog">Categories</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </nav>
+                <a href="#"><img src="/static/images/shoppingcart.png" width="30px" height="30px"></a>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <h1>Try the taste of Harmony <br>With us</h1>
+                    <p>Enjoy the best quality tea </p>
+                    <a href="#" class="btn">Explore now &#8594;</a>
+                </div>
+                <div class="col-2">
+                    <img src="/static/images/background1.png" width="200%" height="200%">
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!---categories-->
+    <section class="categories" id="catalog">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <a href="#tea"><img src="/static/images/category1.png "></a>
+                </div>
+                <div class="col-3">
+                    <a href="#pots"><img src="/static/images/category2.png"></a>
+                </div>
+                <div class="col-3">
+                    <a href="#utensils"><img src="/static/images/category3.png"></a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!---featured pu-erh -->
+
+    <div class="small-container">
+        <h2 class="title" id="tea">Featured Pu-erh </h2>
+        <div class="row">
+            {% for tea in tea %}
+            <a href="{{tea.link}}">
+            <div class="col-4 product-container">
+                <img src="/static/images/{{tea.image}}.png">
+                <h3>{{tea.name}}</h3>
+                <p>{{tea.price}}</p>
+            </div>
+        </a>
+            {% endfor %}
+
+
+
+           
+    <!---featured tea pots -->
+
+    <div class="small-container">
+        <h2 class="title" id="pots">Featured Tea pots </h2>
+        <div class="row">
+            {% for pot in pots %}
+            <a href="{{pot.link}}">
+            <div class="col-4 product-container">
+                <img src="/static/images/{{pot.image}}.png">
+                <h3>{{pot.name}}</h3>
+                <p>{{pot.price}}$</p>
+            </div>
+            </a>
+        {% endfor %}
+        </div>
+    </div>
+    <!---Latest tea utensils -->
+
+    <div class="small-container">
+        <h2 class="title" id="utensils">Latest Utensils </h2>
+        <div class="row">
+            
+            {% for utensil in utensils %}
+            <a href="{{utensil.link}}">
+
+            <div class="col-4 product-container">
+                <img src="/static/images/{{utensil.image}}.png">
+                <h3>{{utensil.name}} </h3>
+                <p>{{utensil.price}}</p>
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+
+    <!--Offer-->
+    <section class="offer">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <img src="/static/images/offer.png" class="offer-img">
+                </div>
+                <div class="col-3">
+                    <p>Super high quality</p>
+                    <h1>Wild Shu</h1>
+                    <small>exclusive tea from princess gardens</small>
+                    <a href="#" class="btn">Buy now &#8594; </a>
+                </div>
+
+
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    <!--testimonials-->
+    <section class="testimonials">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <p>"This is the kind of tea traded and drunk by Tibetan nomads for centuries. It is very rich and
+                        exotic in flavor. Pu-erh tea comes in bricks, small cakes and large cakes like this.
+                        Strain the brew into a pre-heated antique tea bowl. Perhaps memories of a past life or two spent
+                        on the Chang Tang will drift back to you as you sip."</p>
+                    <img src="/static/images/comment1.png">
+                    <h3>Andriy Horolskiy</h3>
+                </div>
+
+
+                <div class="col-3">
+                    <p>" This tea is very mellow and I'd imagine very hard to make bitter due to the fermentation
+                        process, it has strong woody presence, both scent and taste, reminiscent of green rooibos. I am
+                        happy that my friend recommended it to me. I
+                        would definitely buy this again.. now back to tasting the tea"</p>
+                    <img src="/static/images/comment2.png">
+                    <h3>John Schmidt</h3>
+                </div>
+                <div class="col-3">
+                    <p>"I like this tea well enough that I have reordered it. To me, it has a darker richer flavor. I
+                        cannot actually compare this tea to others of its type because this is the only one that I have
+                        tried. That is the reason for four stars instead of five. In the future I intend to try other
+                        brands of this type of tea for purposes of comparison."</p>
+                    <img src="/static/images/comment3.png">
+                    <h3>Sundy Wing</h3>
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </section>
+
+    <!--brands section-->
+    <section class="brands">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="/static/images/brand1.png">
+                </div>
+                <div class="col-5">
+                    <img src="/static/images/brand2.png">
+                </div>
+                <div class="col-5">
+                    <img src="/static/images/brand3.png">
+                </div>
+                <div class="col-5">
+                    <img src="/static/images/brand4.png">
+
+                </div>
+                <div class="col-5">
+                    <img src="/static/images/brand5.png">
+                </div>
+                
+            </div>
+
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="small-container">
+            <div class="row">
+                <div class="footer col-1">
+                    <p> Sign up to our blog to learn about new product arrivals and the best deals</p>
+
+                   
+                </div>
+            </div>
+            <div class="footer col-2">
+                <img src="/static/images/logo.png">
+                <p>
+                   We are dedicated to serving only best quality tea from trusted brands and partners. Join our community of teacoholics.  
+                </p>
+            </div>
+            <div class="footer col-3">
+                <h3>Useful links</h3>
+                <ul>
+                    <li>Return Policy</li>
+                    <li>Blog</li>
+                    <li>Contacts</li>
+                    <li>Social media</li> 
+
+
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyright 2023 - all rights reserved</p>
+    </section>
+{% endblock %}

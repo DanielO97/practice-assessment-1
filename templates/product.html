@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %} Tea {{ name }} {% endblock %}
+{% block body %}
+<h1> {{product_type}} {{ name }} </h1>
+<a href="/buy/product/{{product_type}}/{{name}}">Buy</a>
+{% endblock %}
