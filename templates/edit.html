@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} Tea {{ name }} {% endblock %}
+{% block body %}
+<img src="/static/images/{{product.image}}">
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<p>Price: {{ product.price }}</p>
+<p>Category: {{ product.category }}</p>
+
+<form action="{{url_for('edit_product', id=product.id)}}" method="post" enctype="multipart/form-data">
+  <div>
+  <label for="name">Name</label>
+  <input type="text" name="name" value="{{ product.name }}"></input>
+  </div>
+  <div>
+  <label for="price">Price</label>
+  <input type="text" name="price" value="{{ product.price }}"></input>
+  </div>
+  <div>
+  <label for="is_featured">Is Featured</label>
+  <input type="checkbox" name="is_featured" {% if product.is_featured %}checked{% endif %}></input>
+  </div>
+  <div>
+  <label for="product_type">Product Type</label>
+  <select name="product_type_id">
+    {% for product_type in product_types %}
+      <option value="{{ product_type.id }}" {% if product_type.id == product.product_type_id %}selected{% endif %}>{{ product_type.name }}</option>
+    {% endfor %}
+  </select>
+  </div>
+  <div>
+  <label for="image">Image</label>
+  <input type="file" name="image"></input> 
+  </div>
+  <input type="submit" value="Update"></input>
+</form>
+<br/><br/>
+<form action="{{url_for('delete_product', id=product.id)}}" method="post">
+  <input type="submit" value="Delete"></input>
+</form>
+{% endblock %}
+

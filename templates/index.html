@@ -13,6 +13,7 @@
                         <li><a href="#blog">Blog</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">About</a></li>
+                        <li><a href="/product/create">Create Product</a></li>
                     </ul>
                 </nav>
                 <a href="#"><img src="/static/images/shoppingcart.png" width="30px" height="30px"></a>
@@ -56,7 +57,7 @@
             {% for tea in tea %}
             <a href="/product/{{tea.id}}">
             <div class="col-4 product-container">
-                <img src="/static/images/{{tea.image}}.png">
+                <img src="/static/images/{{tea.image}}">
                 <h3>{{tea.name}}</h3>
                 <p>{{tea.price}}</p>
             </div>
@@ -74,7 +75,7 @@
             {% for pot in pots %}
             <a href="/product/{{pot.id}}">
             <div class="col-4 product-container">
-                <img src="/static/images/{{pot.image}}.png">
+                <img src="/static/images/{{pot.image}}">
                 <h3>{{pot.name}}</h3>
                 <p>{{pot.price}}$</p>
             </div>
@@ -92,7 +93,7 @@
             <a href="/product/{{utensil.id}}">
 
             <div class="col-4 product-container">
-                <img src="/static/images/{{utensil.image}}.png">
+                <img src="/static/images/{{utensil.image}}">
                 <h3>{{utensil.name}} </h3>
                 <p>{{utensil.price}}</p>
             </div>
@@ -107,7 +108,7 @@
         <div class="small-container">
             <div class="row">
                 <div class="col-3">
-                    <img src="/static/images/offer.png" class="offer-img">
+                    <img src="/static/images/offer" class="offer-img">
                 </div>
                 <div class="col-3">
                     <p>Super high quality</p>

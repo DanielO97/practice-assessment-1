@@ -2,7 +2,7 @@
 {% block title %} Tea {{ name }} {% endblock %}
 {% block body %}
 {% for product in products %}
-<img src="/static/images/{{product.image}}.png">
+<img src="/static/images/{{product.image}}">
 <h1> {{product.product_type.name}} {{ product.name }} </h1>
 <a href="/buy/{{product.id}}">Buy</a>
 {% endfor %}

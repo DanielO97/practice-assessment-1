@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<form action="{{url_for('create_product')}}" method="post" enctype="multipart/form-data">
+  <div>
+  <label for="name">Name</label>
+  <input type="text" name="name" value=""></input>
+  </div>
+  <div>
+  <label for="price">Price</label>
+  <input type="text" name="price" value=""></input>
+  </div>
+  <div>
+  <label for="is_featured">Is Featured</label>
+  <input type="checkbox" name="is_featured"></input>
+  </div>
+  <div>
+  <label for="product_type">Product Type</label>
+  <select name="product_type_id">
+    {% for product_type in product_types %}
+      <option value="{{ product_type.id }}">{{ product_type.name }}</option>
+    {% endfor %}
+  </select>
+  </div>
+  <div>
+  <label for="image">Image</label>
+  <input type="file" name="image"></input> 
+  </div>
+  <input type="submit" value="Create"></input>
+</form>
+{% endblock %}
+
