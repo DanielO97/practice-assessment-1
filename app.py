@@ -15,7 +15,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
     image = db.Column(db.String, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.String, nullable=False)
     is_featured = db.Column(db.Boolean, default=False)
     product_type_id = db.Column(db.Integer, db.ForeignKey('product_type.id'))
 
