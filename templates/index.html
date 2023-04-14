@@ -54,7 +54,7 @@
         <h2 class="title" id="tea">Featured Pu-erh </h2>
         <div class="row">
             {% for tea in tea %}
-            <a href="{{tea.link}}">
+            <a href="/product/{{tea.id}}">
             <div class="col-4 product-container">
                 <img src="/static/images/{{tea.image}}.png">
                 <h3>{{tea.name}}</h3>
@@ -72,7 +72,7 @@
         <h2 class="title" id="pots">Featured Tea pots </h2>
         <div class="row">
             {% for pot in pots %}
-            <a href="{{pot.link}}">
+            <a href="/product/{{pot.id}}">
             <div class="col-4 product-container">
                 <img src="/static/images/{{pot.image}}.png">
                 <h3>{{pot.name}}</h3>
@@ -89,7 +89,7 @@
         <div class="row">
             
             {% for utensil in utensils %}
-            <a href="{{utensil.link}}">
+            <a href="/product/{{utensil.id}}">
 
             <div class="col-4 product-container">
                 <img src="/static/images/{{utensil.image}}.png">

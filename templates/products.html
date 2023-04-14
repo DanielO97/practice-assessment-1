@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %} Tea {{ name }} {% endblock %}
 {% block body %}
+{% for product in products %}
 <img src="/static/images/{{product.image}}.png">
-<h1> Buying {{product.product_type.name}} {{ product.name }} </h1>
-<h3> Price {{ product.price }}</h3>
+<h1> {{product.product_type.name}} {{ product.name }} </h1>
+<a href="/buy/{{product.id}}">Buy</a>
+{% endfor %}
 {% endblock %}

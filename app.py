@@ -1,99 +1,59 @@
 from flask import Flask, redirect, render_template, url_for
+from flask_sqlalchemy import SQLAlchemy
+import os
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+db = SQLAlchemy()
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object('config')
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///' + os.path.join(basedir, 'db.db')
+db.init_app(app)
 
-pots = [
-    {
-        'name': 'Princess Zi',
-        'price': '89',
-        'image': 'pot2',
-        'link':'/product/pots/princess-zi',
-    },
-    {'name': 'Reslience', 'price': '99', 'image': 'pot1', 'link':'/product/pots/reslience'},
-    {'name': 'Watergate', 'price': '120', 'image': 'pot2', 'link':'/product/pots/watergate'},
-    {'name': 'Yunnan', 'price': '70', 'image': 'pot3', 'link':'/product/pots/yunnan'},
-    {'name': 'Bao Li', 'price': '55', 'image': 'pot4', 'link':'/product/pots/bao-li'},
-]
 
-utensils = [
-    {
-        'name': 'Handmade teadesk',
-        'price': '150$',
-        'image': 'utensil1',
-        'link':'/product/utensils/handmade-teadesk',
-    },
-    {
-        'name': 'Handmade ceramic tea cups',
-        'price': '89$',
-        'image': 'utensil2',
-        'link':'/product/utensils/handmade-ceramic-tea-cups',
-    },
-    {
-        'name': 'Burano Glass kettle',
-        'price': '60$',
-        'image': 'utensil3',
-        'link':'/product/utensils/burano-glass-kettle',
-    },
-    {
-        'name': 'Super bottle',
-        'price': '40$',
-        'image': 'utensil4',
-        'link':'/product/utensils/super-bottle',
-    },
-    {
-        'name': 'Silver style',
-        'price': '30$',
-        'image': 'utensil5',
-        'link':'/product/utensils/silver-style',
-    },
-]
-tea = [
-    {
-        'name': 'Da Shu Cha',
-        'price': '25$',
-        'image': 'product1',
-        'link':'/product/tea/du-shu-cha',
-    },
-    {
-        'name': 'Qizi Beeng Cha',
-        'price': '25$',
-        'image': 'product2',
-        'link':'/product/tea/qizi-beeng-cha',
-    },
-    {
-        'name': 'Ging May Cha',
-        'price': '25$',
-        'image': 'product3',
-        'link':'/product/tea/ging-may-cha',
-    },
-    {
-        'name': 'Yunnan QI Zi Bing Cha',
-        'price': '35$',
-        'image': 'product4',
-        'link':'/product/tea/yunnan-qi-zi-bing-cha',
-    },
-    {
-        'name': 'Yunnan Bingcha',
-        'price': '20$',
-        'image': 'product5',
-        'link':'/product/tea/yunnan-bing-cha',
-    },
-]
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True, nullable=False)
+    image = db.Column(db.String, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    is_featured = db.Column(db.Boolean, default=False)
+    product_type_id = db.Column(db.Integer, db.ForeignKey('product_type.id'))
+
+
+class ProductType(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True, nullable=False)
+    products = db.relationship('Product', backref='product_type')
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', pots=pots, utensils=utensils, tea=tea)
+    entries = Product.query.filter(Product.is_featured.is_(True)).all()
+    featured = {
+        'pot': [],
+        'utensil': [],
+        'tea': [],
+    }
+    for entry in entries:
+        featured[entry.product_type.name].append(entry)
+    return render_template('index.html', pots=featured['pot'], utensils=featured['utensil'], tea=featured['tea'])
 
 
-@app.route('/product/<product_type>/<name>')
-def product_route(product_type, name):
-    return render_template('product.html', product_type=product_type, name=name)
+@app.route('/products')
+def all_products():
+    products = Product.query.all()
+    return render_template('products.html', products=products)
 
-@app.route('/buy/product/<product_type>/<name>')
-def buy_product(product_type, name):
-    return render_template('buy.html', product_type=product_type, name=name)
+@app.route('/product/<id>')
+def product_route(id):
+    product = Product.query.filter(Product.id.is_(id)).first()
+    return render_template('product.html', product=product)
+
+
+@app.route('/buy/<id>')
+def buy_product(id):
+    product = Product.query.filter(Product.id.is_(id)).first()
+    return render_template('buy.html', product=product)
+
 
 if __name__ == '__main__':
     app.run()
