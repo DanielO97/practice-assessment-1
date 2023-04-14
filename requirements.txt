@@ -9,4 +9,5 @@ SQLAlchemy==2.0.9
 typing_extensions==4.5.0
 Werkzeug==2.2.3
 python-dotenv
+Gunicorn
 psycopg2-binary
