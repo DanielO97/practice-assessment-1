@@ -7,7 +7,7 @@ db = SQLAlchemy()
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object('config')
 app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'static', 'images')
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///' + os.path.join(basedir, 'db.db')
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
 db.init_app(app)
 
 
