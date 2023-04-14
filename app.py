@@ -8,6 +8,7 @@ app = Flask(__name__, static_url_path='/static')
 app.config.from_object('config')
 app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'static', 'images')
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 
@@ -46,13 +47,13 @@ def all_products():
 
 @app.route('/product/<id>')
 def product_route(id):
-    product = Product.query.filter(Product.id.is_(id)).first()
+    product = Product.query.filter_by(id=id).first()
     return render_template('product.html', product=product)
 
 @app.route('/product/<id>/edit', methods=['GET', 'POST'])
 def edit_product(id):
     if request.method == 'POST':
-        product = Product.query.filter(Product.id.is_(id)).first()
+        product = Product.query.filter_by(id=id).first()
         product.name = request.form['name']
         if request.files['image'].filename:
             product.image = request.files['image'].filename
@@ -68,7 +69,7 @@ def edit_product(id):
 
 @app.route('/product/<id>/delete', methods=['POST'])
 def delete_product(id):
-    product = Product.query.filter(Product.id.is_(id)).first()
+    product = Product.query.filter_by(id=id).first()
     db.session.delete(product)
     db.session.commit()
     return redirect(url_for('all_products'))
@@ -92,7 +93,7 @@ def create_product():
 
 @app.route('/buy/<id>')
 def buy_product(id):
-    product = Product.query.filter(Product.id.is_(id)).first()
+    product = Product.query.filter_by(id=id).first()
     return render_template('buy.html', product=product)
 
 
