@@ -64,7 +64,7 @@ def edit_product(id):
         db.session.commit()
         return redirect(url_for('edit_product', id=id))
     else:
-        product = Product.query.filter(Product.id.is_(id)).first()
+        product = Product.query.filter_by(id=id).first()
         return render_template('edit.html', product=product, product_types=ProductType.query.all())
 
 @app.route('/product/<id>/delete', methods=['POST'])
