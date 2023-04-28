@@ -5,15 +5,14 @@
   }
   .logo {
       position:relative;
-      margin-right: 800px;
       padding:40px;
   }
-  
+  .center-nav {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .header {
     background: radial-gradient(#fff, #ffd6d6);
-    
-    
-      
   }
   
   .navbar {

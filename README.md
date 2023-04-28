@@ -29,3 +29,9 @@ the crud functionality is at
 /products/create where someone can create products 
 /products/<id>/edit where someone can edit products
 and /products/<id>/delete where someone can delete a product
+
+___
+
+for dynamic pages i added a modal with javascript. the modal replaces the /products/create page and allows easily to add products fromthe navbar. I did not get time to style it as it took a lot of time to get it the modal working with proper alignment.
+
+i struggled with responsiveness of the navbar, this is something i still need help with.
